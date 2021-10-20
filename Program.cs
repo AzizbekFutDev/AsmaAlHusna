@@ -11,20 +11,30 @@ namespace lesson10
     class Program
     {
         private static string usersApi = "https://randomuser.me/api/";
+        private static string asmaUlHusna = $"http://api.aladhan.com/asmaAlHusna/";
+        private static string prayerTimeApi = $"http://api.aladhan.com/v1/timingsByCity?city=&country=&method=8";
+        private static void changeAsmaAlHusna(int number)
+        {
+            asmaUlHusna = $"http://api.aladhan.com/asmaAlHusna/{number}";
+        }
+        private static void changePrayerTimeApi(string countrie, string citie)
+        {
+            prayerTimeApi = $"http://api.aladhan.com/v1/timingsByCity?city={citie}&country={countrie}&method=8";
+        }
         static async Task Main(string[] args)
         {
-            Console.Write($"Please enter 1~99 ");
+            Console.Write($"Please enter 1~99: ");
             
             var numberName = int.Parse(Console.ReadLine());
 
-            string asmaUlHusna = $"http://api.aladhan.com/asmaAlHusna/{numberName}";
-            Console.Write($"Enter countrie");
+            Console.Write($"Enter countrie: ");
             string countries = Console.ReadLine();
             
-            Console.Write($"Enter cities");
+            Console.Write($"Enter cities: ");
             string cities = Console.ReadLine();
+            changeAsmaAlHusna(numberName);
+            changePrayerTimeApi(countries, cities);
             
-            string prayerTimeApi = $"http://api.aladhan.com/v1/timingsByCity?city={cities}&country={countries}&method=8";
             var httpService = new HttpClientService();
             var result = await httpService.GetObjectAsync<PrayerTime>(prayerTimeApi);
             var resultAsmaUlHusna = await httpService.GetObjectAsync<Root>(asmaUlHusna);
