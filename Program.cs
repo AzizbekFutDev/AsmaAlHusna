@@ -27,43 +27,26 @@ namespace lesson10
             
             var numberName = int.Parse(Console.ReadLine());
 
-            Console.Write($"Enter countrie: ");
-            string countries = Console.ReadLine();
+            // Console.Write($"Enter countrie: ");
+            // string countries = Console.ReadLine();
             
-            Console.Write($"Enter cities: ");
-            string cities = Console.ReadLine();
+            // Console.Write($"Enter cities: ");
+            // string cities = Console.ReadLine();
             changeAsmaAlHusna(numberName);
-            changePrayerTimeApi(countries, cities);
+            // changePrayerTimeApi(countries, cities);
             
             var httpService = new HttpClientService();
-            var result = await httpService.GetObjectAsync<PrayerTime>(prayerTimeApi);
             var resultAsmaUlHusna = await httpService.GetObjectAsync<Root>(asmaUlHusna);
 
-            if(result.IsSuccess)
+            if(resultAsmaUlHusna.IsSuccess)
             {
                 var settings = new JsonSerializerOptions()
                 {
                     WriteIndented = true
                 };
 
-                 var json = JsonSerializer.Serialize(result.Data.Data.Timings, settings)
-                    .Replace("\"", "").Replace("{", "").Replace("}", "")
-                    .Replace(",", "");
+                var json = JsonSerializer.Serialize(resultAsmaUlHusna.Data.Data, settings);
                 Console.WriteLine($"{json}");
-            }
-            else
-            {
-                Console.WriteLine($"{result.ErrorMessage}");
-            }
-            if(resultAsmaUlHusna.IsSuccess)
-            {
-                var settings2 = new JsonSerializerOptions()
-                {
-                    WriteIndented = true
-                };
-
-                var json2 = JsonSerializer.Serialize(resultAsmaUlHusna.Data, settings2);
-                Console.WriteLine($"{json2}");
             }
             else
             {
