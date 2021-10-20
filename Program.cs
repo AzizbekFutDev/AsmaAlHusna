@@ -5,6 +5,7 @@ using lesson10.Dto.PrayerTime;
 using lesson10.Dto.AsmaAlHusna;
 using lesson10.Dto.User;
 using lesson10.Services;
+using lesson10.Extensions;
 
 namespace lesson10
 {
@@ -45,8 +46,10 @@ namespace lesson10
                     WriteIndented = true
                 };
 
-                var json = JsonSerializer.Serialize(resultAsmaUlHusna.Data.Data, settings);
-                Console.WriteLine($"{json}");
+                var json = JsonSerializer.Serialize(resultAsmaUlHusna.Data, settings);
+                var text = json.ToJson().ToObject<string>();
+                Console.WriteLine($"{text}");
+                
             }
             else
             {

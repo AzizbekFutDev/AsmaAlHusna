@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace lesson11.Extensions
+namespace lesson10.Extensions
 {
     public static class JsonExtensions
     {

@@ -1,5 +1,5 @@
 using System.Linq;
-namespace lesson11.Extensions
+namespace lesson10.Extensions
 {
     public static class StringExtensions
     {
