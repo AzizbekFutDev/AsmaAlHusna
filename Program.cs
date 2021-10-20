@@ -46,7 +46,9 @@ namespace lesson10
                     WriteIndented = true
                 };
 
-                var json = JsonSerializer.Serialize(result.Data, settings);
+                 var json = JsonSerializer.Serialize(result.Data.Data.Timings, settings)
+                    .Replace("\"", "").Replace("{", "").Replace("}", "")
+                    .Replace(",", "");
                 Console.WriteLine($"{json}");
             }
             else
